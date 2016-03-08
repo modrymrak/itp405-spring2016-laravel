@@ -10,10 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group(['middleware' => 'web'], function(){
 
-Route::get('/dvds', 'DvdController@dvds');
-Route::get('/dvds/search', 'DvdController@search');
-/*
+  Route::get('/dvds', 'DvdController@dvds');
+  Route::get('/dvds/search', 'DvdController@search');
+  Route::get('/dvds/{id}', 'DVDReviewController@reviewPage');
+  Route::post('/dvds/{id}', 'DVDReviewController@newReview');
+
+});/*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
@@ -25,5 +29,9 @@ Route::get('/dvds/search', 'DvdController@search');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+  Route::get('/dvds', 'DvdController@dvds');
+  Route::get('/dvds/search', 'DvdController@search');
+  Route::get('/dvds/{id}', 'DVDReviewController@reviewPage');
+  Route::post('/dvds/{id}', 'DVDReviewController@newReview');
+
 });

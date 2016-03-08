@@ -28,7 +28,8 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($myDvds as $dvd) : ?>
+
+            <?php foreach ($myDvds as $dvd ) : ?>
                 <?php echo "<tr>"; ?>
 
                 <?php echo  "<td>$dvd->title </td>"?>
@@ -37,7 +38,16 @@
                 <?php echo  "<td>$dvd->label_name </td>"?>
                 <?php echo  "<td>$dvd->sound_name </td>"?>
                 <?php echo  "<td>$dvd->format_name </td>"?>
-                <?php echo "</tr>"; ?>
+                <?php echo
+                  "<td>
+                    <form action=\"/dvds/$dvd->id\" method=\"get\" role=\"form\">
+                      
+                      <input type=\"submit\" value=\"Review\" class=\"btn btn-info\">
+                    </form>
+                  </td>"
+                ?>
+
+                <?php echo "</tr>" ?>
             <?php endforeach?>
             </tbody>
         </table>

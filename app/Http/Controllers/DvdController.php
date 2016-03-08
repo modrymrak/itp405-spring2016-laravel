@@ -12,7 +12,7 @@ class DvdController extends Controller
     public function dvds(Request $request){
 
         $dvds = DB::table('dvds')
-            ->select('title', 'rating_name', 'genre_name', 'label_name', 'sound_name', 'format_name')
+            ->select('dvds.id', 'title', 'rating_name', 'genre_name', 'label_name', 'sound_name', 'format_name')
             ->leftJoin('ratings', 'dvds.rating_id', '=', 'ratings.id')
             ->leftJoin('genres', 'dvds.genre_id', '=', 'genres.id')
             ->leftJoin('labels', 'dvds.label_id', '=', 'labels.id')
@@ -28,7 +28,7 @@ class DvdController extends Controller
         }
 
         $dvd_genre = $request->input('dvd_genre');
-        if(strcmp("All", $dvd_genre) != 0){
+        if(strcmp("All", $dvd_genre) != 0 && !empty($dvd_genre)) {
             $dvds = $dvds->where('genre_name', '=', $dvd_genre);
             if($somethingSet){
                 $buildString .= ", " .$dvd_genre;
@@ -39,7 +39,7 @@ class DvdController extends Controller
         }
 
         $dvd_rating = $request->input('dvd_rating');
-        if(strcmp("All", $dvd_rating) != 0){
+        if(strcmp("All", $dvd_rating) != 0 && !empty($dvd_rating)){
             $dvds = $dvds->where('rating_name', '=', $dvd_rating);
             if($somethingSet){
                 $buildString .= ", " .$dvd_rating;
