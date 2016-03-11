@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DVD Display</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -44,7 +45,7 @@
     <div class="panel-body">
             <form action="/dvds/<?php echo $dvdID?>" method="post" role="form" class = "form-horizontal">
               <?php if(count($errors) > 0) : ?>
-                <ul style="list-style-type: none; color: red;">
+                <ul  class="errorListRed">
                   <?php foreach($errors->all() as $error) :?>
                     <li>
                       <?php echo $error ?>
@@ -53,21 +54,21 @@
                 </ul>
               <?php endif ?>
               <?php if(session('success')) :?>
-                <p style="color: green;">Your review was added successfully.</p>
+                <p class="successParagraph">Your review was added successfully.</p>
               <?php endif ?>
                 <div class="form-group">
                     <?php echo "<input type = \"hidden\" name=\"dvdID\" value=\"$dvdID\">" ?>
                     <?php echo csrf_field() ?>
                     <label for = "title" class = "col-md-2 control-label ">Title: </label>
                     <div class = " col-md-4">
-                      <input type = "text" class="form-control" id="title"  value="<?php echo old('title')?>"  name="title">
+                      <input type = "text" class="form-control" id="title"    name="title">
                     </div>
 
                     <label for = "rating"  class = " control-label col-md-2" >Rating:</label>
                     <div class = " col-md-4">
-                      <select name="rating" id="rating" class="form-control"  value="<?php echo old('rating')?>">
+                      <select name="rating" id="rating" class="form-control"  >
                       <?php for ($i = 1; $i <= 10; $i++) : ?>
-                          <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                          <option value="<?php echo $i; ?>" <?php if(old('rating') == $i){echo 'selected';} ?> ><?php echo $i; ?></option>
                       <?php endfor; ?>
                       </select>
                     </div>

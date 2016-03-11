@@ -14,9 +14,10 @@ Route::group(['middleware' => 'web'], function(){
 
   Route::get('/dvds', 'DvdController@dvds');
   Route::get('/dvds/search', 'DvdController@search');
+  Route::get('/dvds/create', 'DVDController@create');
+  Route::post('/dvds', 'DVDController@createDVD');
   Route::get('/dvds/{id}', 'DVDReviewController@reviewPage');
   Route::post('/dvds/{id}', 'DVDReviewController@newReview');
-
 });/*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -33,5 +34,5 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/dvds/search', 'DvdController@search');
   Route::get('/dvds/{id}', 'DVDReviewController@reviewPage');
   Route::post('/dvds/{id}', 'DVDReviewController@newReview');
-
+  Route::get('/genres/{genre_name}/dvds', 'DVDController@genreDVDsPage');
 });

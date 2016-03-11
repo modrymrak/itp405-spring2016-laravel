@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use Validator;
+use App\Models\Review;
 
 class DVDReviewController extends Controller
 {
@@ -22,13 +23,11 @@ class DVDReviewController extends Controller
           ->leftJoin('formats', 'dvds.format_id', '=', 'formats.id')
           ->where('dvds.id', '=', "$dvdID")->get();
       //$dvd_title = $request->input('dvdTitle');
-      $reviews = DB::table('reviews')
-          ->select('id', 'title', 'description', 'rating')
-          ->where('dvd_id', '=', "$dvdID")->get();
+
       return view('review', [
         'dvdID' => $dvdID,
         'dvd' =>  $dvd,
-        'reviews' => $reviews
+        'reviews' => Review::all(["dvdID" =>$dvdID])
       ]);
     }
 
@@ -48,12 +47,14 @@ class DVDReviewController extends Controller
       $rating = $request->input('rating');
       $description = $request->input('description');
 
-      DB::table('reviews')->insert([
-        'dvd_id'=> $dvdID,
+      $review = new Review([
+        'dvdID' => $dvdID,
         'title' => $title,
-        'description' => $description,
-        'rating' => $rating
+        'rating' => $rating,
+        'description' => $description
       ]);
+      $review->save();
+
       return redirect("dvds/$dvdID")->with('success', true);
     }
 }

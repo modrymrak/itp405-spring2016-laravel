@@ -1,0 +1,40 @@
+#SearchBarFixed{
+  position: fixed;
+  margin-left: 15px;
+  padding-left: 15px;
+}
+.rightSideBar{
+  float: right;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+.rightSideBar > .headingFixed{
+  position: fixed;
+  height:35px;
+  margin-top: 0px;
+  width: 100%;
+  z-index: 1;
+  background-color: white;
+}
+
+.rightSideBar>ul{
+  z-index: 0;
+  margin-top: 35px;
+  list-style-type: none;
+}
+.rightSideBar a:hover{
+  text-decoration: none;
+}
+.rightSideBar li{
+  padding: 5px;
+}
+.rightSideBar li:hover{
+  background-color: pink;
+}
+.errorListRed{
+  list-style-type: none;
+  color: red;
+}
+.successParagraph{
+  color: green;
+}
