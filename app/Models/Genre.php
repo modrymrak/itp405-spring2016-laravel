@@ -9,4 +9,6 @@ class Genre extends Model
     public function dvds(){
       return $this->hasMany('Dvd');
     }
+
+    
 }

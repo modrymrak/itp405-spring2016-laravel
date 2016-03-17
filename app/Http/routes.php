@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::group(['middleware' => 'web'], function(){
 
   Route::get('/dvds', 'DvdController@dvds');
@@ -18,7 +19,17 @@ Route::group(['middleware' => 'web'], function(){
   Route::post('/dvds', 'DVDController@createDVD');
   Route::get('/dvds/{id}', 'DVDReviewController@reviewPage');
   Route::post('/dvds/{id}', 'DVDReviewController@newReview');
-});/*
+  Route::get('/genres/{genre_name}/dvds', 'DVDController@genreDVDsPage');
+});
+
+Route::group(['prefix' => 'api/v1', 'namespace' => 'API'], function(){
+  Route::get('genres', 'ApiController@index');
+  Route::get('genres/{id}', 'ApiController@show');
+  Route::get('dvds', 'ApiController@dvdsIndex');
+  Route::get('dvds/{id}', 'ApiController@dvdsShow');
+  Route::post('dvds', 'ApiController@dvdsStore');
+});
+/*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
@@ -28,11 +39,3 @@ Route::group(['middleware' => 'web'], function(){
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
-Route::group(['middleware' => ['web']], function () {
-  Route::get('/dvds', 'DvdController@dvds');
-  Route::get('/dvds/search', 'DvdController@search');
-  Route::get('/dvds/{id}', 'DVDReviewController@reviewPage');
-  Route::post('/dvds/{id}', 'DVDReviewController@newReview');
-  Route::get('/genres/{genre_name}/dvds', 'DVDController@genreDVDsPage');
-});

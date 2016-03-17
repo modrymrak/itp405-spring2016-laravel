@@ -15,4 +15,6 @@ class Dvd extends Model
     public function genre(){
       return $this->belongsTo('App\Models\Genre');
     }
+
+    protected $hidden = ['release_date', 'label_id', 'sound_id', 'format_id', 'created_at', 'updated_at', 'genre', 'rating'];
 }
