@@ -42,7 +42,7 @@
                           </select>
                         </div>
                         <div class="col-md-2">
-                          <input type="submit" value="Search" class="btn btn-primary">
+                          <input type="submit" value="Search" class="btn btn-primary" id="submitButton">
                         </div>
                     </div>
                 </form>
